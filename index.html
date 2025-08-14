@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物业工程查验助手</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background-color: #f9f9f9; }
+        h1 { color: #333; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; }
+        input, textarea, select { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { padding: 10px 20px; background-color: #007BFF; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #0056b3; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>物业工程查验助手</h1>
+    <div class="form-group">
+        <label>检查项目</label>
+        <input type="text" id="item" placeholder="如：电梯运行">
+    </div>
+    <div class="form-group">
+        <label>检查结果</label>
+        <select id="result">
+            <option value="正常">正常</option>
+            <option value="异常">异常</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>备注</label>
+        <textarea id="remark" placeholder="填写备注..."></textarea>
+    </div>
+    <button onclick="addRecord()">添加记录</button>
+    <table id="recordsTable">
+        <thead>
+            <tr>
+                <th>检查项目</th>
+                <th>结果</th>
+                <th>备注</th>
+                <th>时间</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        function addRecord() {
+            let item = document.getElementById('item').value.trim();
+            let result = document.getElementById('result').value;
+            let remark = document.getElementById('remark').value.trim();
+            if (!item) { alert('请输入检查项目'); return; }
+            let table = document.getElementById('recordsTable').querySelector('tbody');
+            let row = table.insertRow();
+            row.insertCell(0).innerText = item;
+            row.insertCell(1).innerText = result;
+            row.insertCell(2).innerText = remark;
+            row.insertCell(3).innerText = new Date().toLocaleString();
+            document.getElementById('item').value = '';
+            document.getElementById('remark').value = '';
+        }
+    </script>
+</body>
+</html>
